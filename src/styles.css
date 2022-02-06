@@ -147,7 +147,6 @@ td:nth-child(1) {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   font-family: 'Sora', sans-serif;
-
 }
 
 #inputValue::placeholder {
@@ -165,6 +164,13 @@ td:nth-child(1) {
     border-bottom: 1px solid #575756;
     border-radius: 0;
     background-position: 100% center;
+}
+
+.city-list {
+  font-family: 'Andada Pro', serif;
+  font-size: 1rem;
+  padding-top: 0.4rem;
+  cursor: pointer;
 }
 
 .click-button {
