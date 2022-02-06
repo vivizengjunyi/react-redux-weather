@@ -124,7 +124,11 @@ function App() {
         <h2>Weather Forecast</h2>
         <div className='input-wrapper'>
           <input type='text' value={name} onChange={handleChange} id='inputValue' placeholder="Search city" />
+          {filterredCityList.length > 0 && 
+            <div className='city-list-wrapper'>
           {filterredCityList.map(item => <div className='city-list' data-value={item.name + ', ' + item.state + ', ' + item.country} onClick={(e) => chooseCity(e, item)}>{item.name}, {item.state}, {item.country}</div>)}
+          </div>
+          }
         </div>
         {fiveForecast.length !== 0 &&
           <div className='weather-wrapper'>

@@ -132,20 +132,21 @@ td:nth-child(1) {
 }
 
 #inputValue {
-  /* width: 200%; */
+  width: 300px;
   padding: 12px 24px;
   background-color: transparent;
   transition: transform 250ms ease-in-out;
   font-size: 1rem;
   line-height: 18px;
   color: #347B98;
-  background-color: transparent;
+  background-color: #E4F1F6;
   border-radius: 50px;
   border: 1px solid #575756;
   transition: all 250ms ease-in-out;
   backface-visibility: hidden;
   transform-style: preserve-3d;
   font-family: 'Sora', sans-serif;
+  position: relative;
 }
 
 #inputValue::placeholder {
@@ -165,11 +166,24 @@ td:nth-child(1) {
     background-position: 100% center;
 }
 
+.city-list-wrapper {
+  position: absolute;
+  background-color: #E4F1F6;
+  color: #2483A8;
+  z-index: 1;
+  width: 300px;
+  padding-bottom: 0.4rem;
+}
+
 .city-list {
   font-family: 'Andada Pro', serif;
   font-size: 1rem;
   padding-top: 0.4rem;
   cursor: pointer;
+}
+
+.city-list:hover {
+  color:#092834;
 }
 
 .click-button {
