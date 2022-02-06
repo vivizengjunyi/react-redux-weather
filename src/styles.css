@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Andada+Pro&family=Sora:wght@500&display=swap');
+/* 
+font-family: 'Andada Pro', serif;
+font-family: 'Sora', sans-serif;
+*/
+body, html {
+  background-image: url(./img/weather.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position:relative;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  width: 100%;
+  height: 100%;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Sora', sans-serif;
+}
+
+p {
+  font-family: 'Andada Pro', serif;
+}
+
+
+#root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.wrapper-absolute {
+  text-align: center;
+}
+
+.clouds,
+.clear,
+.snow,
+.rain,
+.fog {
+  top:0;
+  left: 0;
+  width: 100%;
+  opacity: 0.8;
+  position: absolute;
+  margin: 0 auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin:0;
+  padding: 0;
+}
+
+.clouds {
+  background-image: url(./img/cloud.jpg);
+}
+
+.clear {
+  background-image: url(./img/clear.jpg);
+}
+
+.snow {
+  background-image: url(./img/snow.jpg);
+}
+
+.rain {
+  background-image: url(./img/rain.jpg);
+}
+
+.fog {
+  background-image: url(./img/fog.jpg);
+}
+
+.weather-wrapper {
+  padding: 1rem;
+  opacity: 0.9;
+  border-radius: 5px;
+  background-color: #67AFCB;
+  margin-top: 10px;
+}
+
+table, th, td {
+  border: 1px solid #1A3E4C;
+  border-collapse: collapse;
+  padding: 1rem;
+  text-align: center;
+}
+
+th {
+  font-family: 'Sora', sans-serif;
+  background-color: #092834;
+  color: #E4F1F6;
+}
+
+td {
+  font-family: 'Andada Pro', serif;
+}
+
+table {
+  max-width: 90%;
+  line-height: 1.5rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  background-color: #E4F1F6;
+}
+
+caption {
+  font-size: 1.3rem;
+  margin: 1.5rem 0;
+  font-weight: bold;
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+}
+
+td:nth-child(1) {
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 1rem;
+  font-family: 'Sora', sans-serif;
+  color: #E4F1F6;
+  background-color: #347B98;
+}
+
+#inputValue {
+  /* width: 200%; */
+  padding: 12px 24px;
+  background-color: transparent;
+  transition: transform 250ms ease-in-out;
+  font-size: 1rem;
+  line-height: 18px;
+  color: #347B98;
+  background-color: transparent;
+  border-radius: 50px;
+  border: 1px solid #575756;
+  transition: all 250ms ease-in-out;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  font-family: 'Sora', sans-serif;
+
+}
+
+#inputValue::placeholder {
+  color: color(#347B98 a(0.8));
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: 'Sora', sans-serif;
+}
+
+#inputValue:hover,
+#inputValue:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
+}
+
+.click-button {
+  background-color: #E4F1F6; 
+  border: none;
+  color: #1A3E4C;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  padding: 10px 24px;
+  border-radius: 2px;
+  display: flex;
+  margin: 1rem auto;
+  font-family: 'Sora', sans-serif;
+  cursor: pointer;
+}
+
+.click-button:hover {
+  background-color: #2483A8;
+  color: #E4F1F6;
+}

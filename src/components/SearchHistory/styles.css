@@ -1,0 +1,24 @@
+.search-history {
+    margin-bottom: 1.5rem;
+}
+
+h4 {
+    text-align: center;
+} 
+
+.search-history > div{
+    cursor: pointer;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    display: inline-block;
+    margin:0;
+    font-family: 'Andada Pro', serif;
+}
+
+.search-history > div:hover,
+.search-history > div:active,
+.search-history > div:focus {
+    color: #092834;
+    background-color: #E4F1F6;
+}
+

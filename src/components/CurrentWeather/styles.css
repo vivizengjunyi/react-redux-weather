@@ -1,0 +1,49 @@
+.current-weather {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Andada Pro', serif;
+}
+
+/* h2 {
+    width: 100%;
+} */
+
+.city-name {
+    /* width: 100%; */
+    font-size: 1.5rem;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column,
+.weather-icon,
+.current-temp {
+    width: 25%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: bold;
+}
+
+.weather-icon {
+    width: inherit;
+}
+.current-temp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.city-date,
+.city-time {
+    
+    font-size: 1.2rem;
+}
