@@ -90,7 +90,7 @@ function App() {
     if (val.weather[0].main.toLowerCase() === 'fog') { setBackgroundColorChange('fog'); }
   }
 
-  const timeConverter = (val) => {
+  const timeConverterDay = (val) => {
     let unix_timestamp = val;
     let a = new Date(unix_timestamp * 1000);
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -106,7 +106,26 @@ function App() {
     let month = months[a.getMonth()];
     let date = a.getDate();
     let day = days[a.getDay()];
-    return day + ' ' + month + ' ' + date;
+    return day;
+  }
+
+  const timeConverterDate = (val) => {
+    let unix_timestamp = val;
+    let a = new Date(unix_timestamp * 1000);
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+    let month = months[a.getMonth()];
+    let date = a.getDate();
+    let day = days[a.getDay()];
+    return month + ' ' + date;
   }
 
   const filterCityListFunction = (item) => {
@@ -142,7 +161,7 @@ function App() {
 
                 <caption>Weather Forecast</caption>
                 <tr>
-                  <th>Date</th>
+                  <th colspan="2">Date</th>
                   <th>Weather</th>
                   <th>Description</th>
                   <th>Morning</th>
@@ -155,7 +174,7 @@ function App() {
                 </tr>
                 {fiveForecast.map((item, i) =>
                   <tr>
-                    <td>{timeConverter(item.dt)}</td>
+                    <td colspan="2"><div>{timeConverterDay(item.dt)}</div><div>{timeConverterDate(item.dt)}</div></td>
                     <td><img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].main} /></td>
                     <td>{item.weather[0].description}</td>
                     <td>{Math.round(item.temp.morn)}&deg;C</td>
@@ -168,7 +187,7 @@ function App() {
                   </tr>
                 )}
                 {showTwoMoreForecast && TwoMoreForecast.map(item => <tr>
-                  <td>{timeConverter(item.dt)}</td>
+                  <td colspan="2"><div>{timeConverterDay(item.dt)}</div><div>{timeConverterDate(item.dt)}</div></td>
                   <td><img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].main} /></td>
                   <td>{item.weather[0].description}</td>
                   <td>{Math.round(item.temp.morn)}&deg;C</td>

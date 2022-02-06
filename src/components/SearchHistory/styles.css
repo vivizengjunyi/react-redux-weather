@@ -20,5 +20,6 @@ h4 {
 .search-history > div:focus {
     color: #092834;
     background-color: #E4F1F6;
+    border-radius: 2px;
 }
 
