@@ -18,7 +18,7 @@ function App() {
   const currentWeatherInfo = useSelector(state => state.weatherReducer.currentWeatherInfo)
   const timerRef = useRef(null);
   const dispatch = useDispatch();
-  const [showThreeMoreForecast, setshowThreeMoreForecast] = useState(false);
+  const [showTwoMoreForecast, setshowTwoMoreForecast] = useState(false);
   const [backgroundColorChange, setBackgroundColorChange] = useState(null);
 
   useEffect(() => {
@@ -109,12 +109,16 @@ function App() {
     return day + ' ' + month + ' ' + date;
   }
 
-  const fiveForecast = (forecastWeather && forecastWeather.daily.filter(item => forecastWeather.daily.indexOf(item) <= 4)) || [];
+  const filterCityListFunction = (item) => {
+    return forecastWeather.daily.indexOf(item) !== 0 && forecastWeather.daily.indexOf(item) <= 5;
+  }
 
-  const threeMoreForecast = forecastWeather && forecastWeather.daily.filter(item => forecastWeather.daily.indexOf(item) > 4);
+  const fiveForecast = (forecastWeather && forecastWeather.daily.filter(filterCityListFunction)) || [];
 
-  const getThreeMoreForecast = (e) => {
-    setshowThreeMoreForecast(true);
+  const TwoMoreForecast = forecastWeather && forecastWeather.daily.filter(item => forecastWeather.daily.indexOf(item) > 5);
+
+  const getTwoMoreForecast = (e) => {
+    setshowTwoMoreForecast(true);
   }
 
   return (
@@ -163,7 +167,7 @@ function App() {
                     <td>{Math.round((item.temp.max - item.temp.min) / 2)}&deg;C</td>
                   </tr>
                 )}
-                {showThreeMoreForecast && threeMoreForecast.map(item => <tr>
+                {showTwoMoreForecast && TwoMoreForecast.map(item => <tr>
                   <td>{timeConverter(item.dt)}</td>
                   <td><img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].main} /></td>
                   <td>{item.weather[0].description}</td>
@@ -177,7 +181,7 @@ function App() {
                 </tr>)
                 }
               </table>
-              {!showThreeMoreForecast ? <button onClick={(e) => getThreeMoreForecast()} className='click-button'>See 3 More days</button> : ''}
+              {!showTwoMoreForecast ? <button onClick={(e) => getTwoMoreForecast()} className='click-button'>See 2 More days</button> : ''}
             </section>
           </div>
         }
