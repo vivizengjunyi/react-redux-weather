@@ -28,11 +28,13 @@ function App() {
       dispatch(currentWeather(selectedCity))
     }
   }, [selectedCity])
+
   useEffect(() => {
     if (currentWeatherInfo) {
       handleBackgroundColorChange(currentWeatherInfo)
     }
   }, [currentWeatherInfo])
+
   const recentSelectedCities = getCities();
 
   const handleChange = (e) => {
@@ -42,7 +44,6 @@ function App() {
       type: 'weather/setName',
       payload: value
     })
-
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
