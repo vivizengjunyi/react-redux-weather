@@ -4,32 +4,22 @@ import './styles.css';
 
 const WeatherCurrent = () => {
     const currentWeatherInfo = useSelector(state => state.weatherReducer.currentWeatherInfo);
+    const forecastWeather = useSelector(state => state.weatherReducer.forecastWeather);
 
-    function monthAndDay(val) {
-        let unix_timestamp = val;
+    function monthAndDay(val1,val2) {
+        let unix_timestamp = val1;
         let a = new Date(unix_timestamp * 1000);
-        let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        let days = [
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-        ];
-        let month = months[a.getMonth()];
-        let date = a.getDate();
-        let day = days[a.getDay()];
-        return day + ' ' + month + ' ' + date;
+        let weekday = a.toLocaleDateString('en-US', { timeZone: val2, weekday:'long' });
+        let month = a.toLocaleDateString('en-US', { timeZone: val2, month:'long' });
+        let day = a.toLocaleDateString('en-US', { timeZone: val2, day:'2-digit' });
+        return weekday + " " + month + ' ' + day;
     }
 
-    function hourAndMinute(val) {
-        let unix_timestamp = val;
+    function hourAndMinute(val1, val2) {
+        let unix_timestamp = val1;
         let a = new Date(unix_timestamp * 1000);
-        let hour = a.getHours();
-        var min = a.getMinutes();
-        return hour + ":" + min;
+        let time = a.toLocaleTimeString('en-US', { timeZone: val2 });
+        return time.substring(0,4) + " " + time.substring(time.length - 2);
     }
 
 
@@ -41,11 +31,8 @@ const WeatherCurrent = () => {
             </div>
             <div className='row'>
                 <div className='column'>
-                    <div className='city-date'>{monthAndDay(currentWeatherInfo.dt)}</div>
-                    <div className='city-time'>{hourAndMinute(currentWeatherInfo.dt)}</div>
-                    {/* <div className='weather-name'>
-                        {currentWeatherInfo.weather[0].main}
-                    </div> */}
+                    <div className='city-date'>{monthAndDay(currentWeatherInfo.dt, forecastWeather.timezone)}</div>
+                    <div className='city-time'>{hourAndMinute(currentWeatherInfo.dt, forecastWeather.timezone)}</div>
                 </div>
                 <img src={`https://openweathermap.org/img/wn/${currentWeatherInfo.weather[0].icon}@2x.png`} alt={currentWeatherInfo.weather.main} className='weather-icon' />
                 <div className='current-temp'>

@@ -90,42 +90,19 @@ function App() {
     if (val.weather[0].main.toLowerCase() === 'fog') { setBackgroundColorChange('fog'); }
   }
 
-  const timeConverterDay = (val) => {
-    let unix_timestamp = val;
+  const timeConverterDay = (val, val2) => {
+    let unix_timestamp = val.dt;
     let a = new Date(unix_timestamp * 1000);
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    let month = months[a.getMonth()];
-    let date = a.getDate();
-    let day = days[a.getDay()];
+    let day = a.toLocaleDateString('en-US', { timeZone: val2, weekday:'long' })
     return day;
   }
 
-  const timeConverterDate = (val) => {
-    let unix_timestamp = val;
+  const timeConverterDate = (val ,val2) => {
+    let unix_timestamp = val.dt;
     let a = new Date(unix_timestamp * 1000);
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    let month = months[a.getMonth()];
-    let date = a.getDate();
-    let day = days[a.getDay()];
-    return month + ' ' + date;
+    let date = a.toLocaleDateString('en-US', { timeZone: val2, date:'long' })
+    return date = date.substring(0, date.length - 5);
+    
   }
 
   const filterCityListFunction = (item) => {
@@ -174,7 +151,7 @@ function App() {
                 </tr>
                 {fiveForecast.map((item, i) =>
                   <tr>
-                    <td colspan="2"><div>{timeConverterDay(item.dt)}</div><div>{timeConverterDate(item.dt)}</div></td>
+                    <td colspan="2"><div>{timeConverterDay(item, forecastWeather.timezone)}</div><div className=''>{timeConverterDate(item, forecastWeather.timezone)}</div></td>
                     <td><img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].main} /></td>
                     <td>{item.weather[0].description}</td>
                     <td>{Math.round(item.temp.morn)}&deg;C</td>
@@ -187,7 +164,7 @@ function App() {
                   </tr>
                 )}
                 {showTwoMoreForecast && TwoMoreForecast.map(item => <tr>
-                  <td colspan="2"><div>{timeConverterDay(item.dt)}</div><div>{timeConverterDate(item.dt)}</div></td>
+                  <td colspan="2"><div>{timeConverterDay(item, forecastWeather.timezone)}</div><div>{timeConverterDate(item, forecastWeather.timezone)}</div></td>
                   <td><img src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`} alt={item.weather[0].main} /></td>
                   <td>{item.weather[0].description}</td>
                   <td>{Math.round(item.temp.morn)}&deg;C</td>

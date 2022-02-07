@@ -133,6 +133,11 @@ td:nth-child(1) {
   background-color: #347B98;
 }
 
+td:nth-child(1) div:nth-child(2) {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
 #inputValue {
   width: 300px;
   padding: 12px 24px;
@@ -211,6 +216,3 @@ td:nth-child(1) {
   color: #E4F1F6;
 }
 
-.date {
-  width: 100%;
-}
