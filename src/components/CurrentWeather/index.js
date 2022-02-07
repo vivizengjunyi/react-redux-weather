@@ -18,8 +18,8 @@ const WeatherCurrent = () => {
     function hourAndMinute(val1, val2) {
         let unix_timestamp = val1;
         let a = new Date(unix_timestamp * 1000);
-        let time = a.toLocaleTimeString('en-US', { timeZone: val2 });
-        return time.substring(0,4) + " " + time.substring(time.length - 2);
+        let time = a.toLocaleTimeString('en-US', { timeZone: val2, timeStyle: 'short', hourCycle: 'h11' });
+        return time;
     }
 
 
