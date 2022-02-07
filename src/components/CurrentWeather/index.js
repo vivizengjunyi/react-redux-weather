@@ -22,7 +22,6 @@ const WeatherCurrent = () => {
         return time;
     }
 
-
     return currentWeatherInfo ? (
         <section className='current-weather'>
             <h2>Current Weather</h2>

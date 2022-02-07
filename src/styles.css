@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Andada+Pro&family=Sora:wght@500&display=swap');
-/* 
-font-family: 'Andada Pro', serif;
-font-family: 'Sora', sans-serif;
-*/
+
 body, html {
   background-image: url(./img/weather.jpg);
   background-position: center;

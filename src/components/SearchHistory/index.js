@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import './styles.css';
+
 const SearchHistory = ({ recentSelectedCities }) => {
     const dispatch = useDispatch();
     let filterCities = [];
@@ -15,4 +16,5 @@ const SearchHistory = ({ recentSelectedCities }) => {
         </section>
     )
 }
+
 export default SearchHistory;
