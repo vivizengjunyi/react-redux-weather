@@ -16,7 +16,6 @@ function App() {
   const selectedCity = useSelector(state => state.weatherReducer.selectedCity);
   const forecastWeather = useSelector(state => state.weatherReducer.forecastWeather);
   const currentWeatherInfo = useSelector(state => state.weatherReducer.currentWeatherInfo)
-  const timerRef = useRef(null);
   const dispatch = useDispatch();
   const [showTwoMoreForecast, setshowTwoMoreForecast] = useState(false);
   const [backgroundColorChange, setBackgroundColorChange] = useState(null);
@@ -37,9 +36,9 @@ function App() {
 
   const recentSelectedCities = getCities();
 
+  const timerRef = useRef(null);
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log(value)
     dispatch({
       type: 'weather/setName',
       payload: value
@@ -51,59 +50,58 @@ function App() {
   }
 
   const filterCityList = (cityList) => {
-    let newCityListArray = [...cityList]
-    for (let i = 0; i < cityList.length - 1; i++) {
-      for (let j = 1; j < cityList.length; j++) {
-        if (cityList[i].lon === cityList[j].lon && cityList[i].lat === cityList[j].lat) {
-          newCityListArray.splice(j, 1)
-        }
-      }
-    }
-    return newCityListArray;
+    const cityMap = {}
+    cityList.forEach(item => {
+      const LonLat = item.lon + '-' + item.lat;
+      if(!cityMap[LonLat])
+        cityMap[LonLat] = item;
+    })
+    return Object.values(cityMap)
   }
   const filterredCityList = filterCityList(cityList);
 
   const chooseCity = (e, item) => {
-    const el = e.target;
+    let el = e.target;
     while (!el && el.tagName.toLowerCase() !== 'div') {
       el = el.parentNode;
     }
-    dispatch({
-      type: 'weather/selectCity',
-      payload: item
-    })
     const dataValue = el.getAttribute('data-value');
     dispatch({
-      type: 'weather/setName',
-      payload: dataValue
-    })
-    dispatch({
-      type: 'weather/fetchLocation',
-      payload: []
+      type: 'weather/chooseCity',
+      payload: {
+        name: dataValue,
+        selectedCity: item
+      }
     })
   }
 
   const handleBackgroundColorChange = (val) => {
-    if (val.weather[0].main.toLowerCase() === 'clouds') { setBackgroundColorChange('clouds'); }
-    if (val.weather[0].main.toLowerCase() === 'clear') { setBackgroundColorChange('clear'); }
-    if (val.weather[0].main.toLowerCase() === 'rain') { setBackgroundColorChange('rain'); }
-    if (val.weather[0].main.toLowerCase() === 'snow') { setBackgroundColorChange('snow'); }
-    if (val.weather[0].main.toLowerCase() === 'fog') { setBackgroundColorChange('fog'); }
+    const type = val.weather[0].main.toLowerCase();
+    switch (type) {
+      case 'clouds':
+      case 'clear':
+      case 'rain':
+      case 'snow':
+      case 'fog':
+        setBackgroundColorChange(type)
+        break;
+      default:
+        return;
+    }
   }
 
   const timeConverterDay = (val, val2) => {
     let unix_timestamp = val.dt;
     let a = new Date(unix_timestamp * 1000);
-    let day = a.toLocaleDateString('en-US', { timeZone: val2, weekday:'long' })
+    let day = a.toLocaleDateString('en-US', { timeZone: val2, weekday: 'long' })
     return day;
   }
 
-  const timeConverterDate = (val ,val2) => {
+  const timeConverterDate = (val, val2) => {
     let unix_timestamp = val.dt;
     let a = new Date(unix_timestamp * 1000);
-    let date = a.toLocaleDateString('en-US', { timeZone: val2, date:'long' })
+    let date = a.toLocaleDateString('en-US', { timeZone: val2, date: 'long' })
     return date = date.substring(0, date.length - 5);
-    
   }
 
   const filterCityListFunction = (item) => {
@@ -125,10 +123,10 @@ function App() {
         <h2>Weather Forecast</h2>
         <div className='input-wrapper'>
           <input type='text' value={name} onChange={handleChange} id='inputValue' placeholder="Search city" />
-          {filterredCityList.length > 0 && 
+          {filterredCityList.length > 0 &&
             <div className='city-list-wrapper'>
-          {filterredCityList.map(item => <div className='city-list' data-value={item.name + ', ' + item.state + ', ' + item.country} onClick={(e) => chooseCity(e, item)}>{item.name}, {item.state}, {item.country}</div>)}
-          </div>
+              {filterredCityList.map(item => <div className='city-list' data-value={item.name + ', ' + item.state + ', ' + item.country} onClick={(e) => chooseCity(e, item)}>{item.name}, {item.state}, {item.country}</div>)}
+            </div>
           }
         </div>
         {fiveForecast.length !== 0 &&

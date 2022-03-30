@@ -7,6 +7,13 @@ const defaultState = {
 }
 const weatherReducer = (state = defaultState, action) => {
     switch(action.type) {
+        case 'weather/chooseCity':
+            return {
+                ...state,
+                selectedCity: action.payload.selectedCity,
+                name: action.payload.name,
+                cityList : []
+            }
         case 'weather/setName':
             return {
                 ...state,

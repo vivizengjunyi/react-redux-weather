@@ -36,5 +36,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://junyizeng.me/weather/"
+  "homepage": "https://junyizeng.me/weather/",
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "react-test-renderer": "^17.0.2"
+  }
 }

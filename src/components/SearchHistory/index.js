@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { selectCity, setName } from '../../action';
 import './styles.css';
 
 const SearchHistory = ({ recentSelectedCities }) => {
@@ -9,7 +10,10 @@ const SearchHistory = ({ recentSelectedCities }) => {
         <section className='search-history'>
             {filterCities.length > 0 && <h4>Search History</h4>}
             {filterCities.length > 0 && filterCities.map((item, i) =>
-                <div className="weather-card" onClick={(e) => {dispatch({type: 'weather/selectCity', payload: item}); dispatch({type: 'weather/setName', payload: item.name + ', ' + item.state + ', ' + item.country})}}>
+                <div className="weather-card" onClick={(e) => {
+                    dispatch(selectCity(item)); 
+                    dispatch(setName(item.name + ', ' + item.state + ', ' + item.country))
+                }}>
                     <div>{item.name}</div>
                 </div>
             )}
