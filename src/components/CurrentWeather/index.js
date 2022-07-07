@@ -47,7 +47,7 @@ const WeatherCurrent = () => {
                 </div>
             </div>
         </section>
-    ) : ''
+    ) : null
 }
 
 export default WeatherCurrent;
