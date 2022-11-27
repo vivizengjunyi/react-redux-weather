@@ -1,14 +1,16 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { selectCity, setName } from '../../action';
+import { ICityList, selectCity, setName } from '../../action';
 import './styles.css';
-
-const SearchHistory = ({ recentSelectedCities }) => {
+interface IProps {
+    recentSelectedCities: ICityList[]
+}
+const SearchHistory = ({ recentSelectedCities }:IProps) => {
     const dispatch = useDispatch();
-    let filterCities = [];
-    filterCities = recentSelectedCities.slice(0, 5);
+    let filterCities = recentSelectedCities.slice(0, 5);
     return (
-        <section className='search-history'>
-            {filterCities.length > 0 && <h4>Search History</h4>}
+        <section className='search-history d-flex align-items-center'>
+            {filterCities.length > 0 && <span className="bold">Search History:</span>}
             {filterCities.length > 0 && filterCities.map((item, i) =>
                 <div className="weather-card" onClick={(e) => {
                     dispatch(selectCity(item)); 

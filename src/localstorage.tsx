@@ -1,5 +1,7 @@
-export const setCity = (city) => {
-    let cities = getCities();
+import { ICityList } from "./action";
+
+export const setCity = (city:ICityList) => {
+    let cities:ICityList[] = getCities();
     cities = cities.filter(item => item.name !== city.name)
     localStorage.setItem('cities', JSON.stringify([city, ...cities]))
 }
