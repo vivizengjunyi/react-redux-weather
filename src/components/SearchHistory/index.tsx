@@ -12,7 +12,7 @@ const SearchHistory = ({ recentSelectedCities }:IProps) => {
         <section className='search-history d-flex align-items-center'>
             {filterCities.length > 0 && <span className="bold">Search History:</span>}
             {filterCities.length > 0 && filterCities.map((item, i) =>
-                <div className="weather-card" onClick={(e) => {
+                <div key = {i} className="weather-card" onClick={(e) => {
                     dispatch(selectCity(item)); 
                     dispatch(setName(item.name + ', ' + item.state + ', ' + item.country))
                 }}>

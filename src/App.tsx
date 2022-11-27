@@ -114,18 +114,21 @@ function App() {
     let unix_timestamp = val.dt;
     let a: Date = new Date(unix_timestamp * 1000);
     let date = a.toLocaleDateString("en-US", {
-      timeZone: val2
+      timeZone: val2,
     });
     return (date = date.substring(0, date.length - 5));
   };
 
-  const weatherForecastFilter:IForeCastWeatherDaily[] = forecastWeather && forecastWeather.daily.slice(1, 8) || [];
+  const weatherForecastFilter: IForeCastWeatherDaily[] =
+    (forecastWeather && forecastWeather.daily.slice(1, 8)) || [];
 
   return (
     <div className={backgroundColorChange}>
       <div className="wrapper">
         <div className="wrapper-bg">
-          <div className="project-language"><h1>React, Redux &amp; TypeScript Project</h1></div>
+          <div className="project-language">
+            <h1>React, Redux &amp; TypeScript Project</h1>
+          </div>
           <h3>Weather Forecast</h3>
           <div>
             <input
@@ -138,8 +141,9 @@ function App() {
             />
             {filterredCityList.length > 0 && (
               <div className="city-list-wrapper">
-                {filterredCityList.map((item) => (
+                {filterredCityList.map((item, i) => (
                   <div
+                    key={i}
                     className="city-list"
                     data-value={
                       item.name + ", " + item.state + ", " + item.country
@@ -157,22 +161,27 @@ function App() {
           <div className="weather-wrapper">
             <CurrentWeather />
             <section className="forecast">
-              <div><span className='title'>Weather Forecast</span></div>
+              <div>
+                <span className="title">Weather Forecast</span>
+              </div>
               <table className="forecast-weather">
-                <tr>
-                  <th colSpan={2}>Date</th>
-                  <th>Weather</th>
-                  <th>Description</th>
-                  <th>Morning</th>
-                  <th>Day</th>
-                  <th>Night</th>
-                  <th>Humidity</th>
-                  <th>Min</th>
-                  <th>Max</th>
-                  <th>Mean</th>
-                </tr>
-                {weatherForecastFilter.map((item, i) => (
+                <thead>
                   <tr>
+                    <th colSpan={2}>Date</th>
+                    <th>Weather</th>
+                    <th>Description</th>
+                    <th>Morning</th>
+                    <th>Day</th>
+                    <th>Night</th>
+                    <th>Humidity</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Mean</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {weatherForecastFilter.map((item, i) => (
+                  <tr key={i}>
                     <td colSpan={2}>
                       <div>
                         {timeConverterDay(item, forecastWeather.timezone)}
@@ -199,6 +208,7 @@ function App() {
                     </td>
                   </tr>
                 ))}
+                </tbody>
               </table>
             </section>
           </div>

@@ -10,20 +10,18 @@ const WeatherCurrent = () => {
     const [_monthAndDay, setMonthAndDay] = React.useState<string>('');
     const [_hourAndMinute, setHourAndMinute] = React.useState<string>('');
 
-    function monthAndDay(val2:string) {
+    function monthAndDay(val:string) {
         let a:Date = new Date();
-        let weekday = a.toLocaleDateString('en-US', { timeZone: val2, weekday:'long' });
-        let month = a.toLocaleDateString('en-US', { timeZone: val2, month:'long' });
-        let day = a.toLocaleDateString('en-US', { timeZone: val2, day:'2-digit' });
-        console.log("interval1");
+        let weekday = a.toLocaleDateString('en-US', { timeZone: val, weekday:'long' });
+        let month = a.toLocaleDateString('en-US', { timeZone: val, month:'long' });
+        let day = a.toLocaleDateString('en-US', { timeZone: val, day:'2-digit' });
         setMonthAndDay( weekday + " " + month + " " + day);
     }
 
-    function hourAndMinute(val2:string) {
+    function hourAndMinute(val:string) {
         let a:Date = new Date();
-        let time = a.toLocaleTimeString('en-US', { timeZone: val2, timeStyle: 'short', hourCycle: 'h12' });
-        console.log("interval2");
-        setHourAndMinute( time);
+        let time = a.toLocaleTimeString('en-US', { timeZone: val, timeStyle: 'short', hourCycle: 'h12' });
+        setHourAndMinute( time );
     }
 
     useEffect(() => {
