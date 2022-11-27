@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { IForeCastWeather, IWeather } from "../../action";
 import { RootState } from '../../reducer/store';
@@ -7,20 +7,35 @@ import './styles.css';
 const WeatherCurrent = () => {
     const currentWeatherInfo = useSelector<RootState, IWeather>(state => state.weatherReducer.currentWeatherInfo);
     const forecastWeather = useSelector<RootState, IForeCastWeather>(state => state.weatherReducer.forecastWeather);
+    const [_monthAndDay, setMonthAndDay] = React.useState<string>('');
+    const [_hourAndMinute, setHourAndMinute] = React.useState<string>('');
 
-    function monthAndDay(val1:number,val2:string) {
-        let a:Date = new Date(val1 * 1000);
+    function monthAndDay(val2:string) {
+        let a:Date = new Date();
         let weekday = a.toLocaleDateString('en-US', { timeZone: val2, weekday:'long' });
         let month = a.toLocaleDateString('en-US', { timeZone: val2, month:'long' });
         let day = a.toLocaleDateString('en-US', { timeZone: val2, day:'2-digit' });
-        return weekday + " " + month + " " + day;
+        console.log("interval1");
+        setMonthAndDay( weekday + " " + month + " " + day);
     }
 
-    function hourAndMinute(val1:number,val2:string) {
-        let a:Date = new Date(val1 * 1000);
-        let time = a.toLocaleTimeString('en-US', { timeZone: val2, timeStyle: 'short', hourCycle: 'h11' });
-        return time;
+    function hourAndMinute(val2:string) {
+        let a:Date = new Date();
+        let time = a.toLocaleTimeString('en-US', { timeZone: val2, timeStyle: 'short', hourCycle: 'h12' });
+        console.log("interval2");
+        setHourAndMinute( time);
     }
+
+    useEffect(() => {
+        const interval = () => {
+            monthAndDay(forecastWeather.timezone);
+            hourAndMinute(forecastWeather.timezone);
+        }
+        const i = setInterval(interval, 1000);
+        return () => {
+            clearInterval(i);
+        }
+    }, [forecastWeather]);
 
     return currentWeatherInfo ? (
         <section className='current-weather'>
@@ -28,8 +43,8 @@ const WeatherCurrent = () => {
             <div><span className='title'>Current Weather</span></div>
             <div className='row'>
                 <div className='column'>
-                    <div className='city-date'>{monthAndDay(currentWeatherInfo.dt, forecastWeather.timezone)}</div>
-                    <div className='city-time'>{hourAndMinute(currentWeatherInfo.dt, forecastWeather.timezone)}</div>
+                    <div className='city-date'>{_monthAndDay}</div>
+                    <div className='city-time'>{_hourAndMinute}</div>
                 </div>
                 <img src={`https://openweathermap.org/img/wn/${currentWeatherInfo.weather[0].icon}@2x.png`} alt={currentWeatherInfo.weather[0].main} className='weather-icon' />
                 <div className='current-temp'>

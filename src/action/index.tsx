@@ -10,6 +10,7 @@ export interface ICityList {
     lon: number,
     country: string,
     state: string,
+    timezone: string,
 }
 
 export const fetchLocation = (val: ICityList[]) => {
@@ -40,7 +41,6 @@ export interface IForeCastWeatherDaily {
     humidity: number;
     name: string;
     dt: number;
-    timezone: number;
 }
 export interface IForeCastWeather {
     daily: IForeCastWeatherDaily[],
@@ -66,7 +66,7 @@ interface ICurrentMain {
 export interface IWeather {
     name: string,
     dt: number,
-    timezone: number,
+    // timezone: string,
     weather: ICurrentWeather[],
     main:  ICurrentMain,
 }
