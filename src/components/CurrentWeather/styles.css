@@ -1,11 +1,17 @@
 .current-weather {
     display: flex;
     flex-direction: column;
-    font-family: 'Andada Pro', serif;
 }
 
 .city-name {
+    transform: translate(0, -1rem);
+}
+
+.title {
     font-size: 1.5rem;
+    background-color: #fff;
+    padding: 0.3rem;
+    border-radius: 3px;
 }
 
 .row {
@@ -39,6 +45,5 @@
 
 .city-date,
 .city-time {
-    
     font-size: 1.2rem;
 }

@@ -1,11 +1,21 @@
-const defaultState = {
+import { PayloadAction } from "@reduxjs/toolkit";
+import { ICityList, IForeCastWeather, IWeather } from "../action";
+
+interface IWeatherState {
+    name: string;
+    cityList: ICityList[];
+    selectedCity: ICityList | null;
+    forecastWeather: IForeCastWeather | null;
+    currentWeatherInfo: IWeather | null;
+}
+const defaultState:IWeatherState = {
     name: '',
     cityList: [],
     selectedCity: null,
     forecastWeather: null,
     currentWeatherInfo: null
 }
-const weatherReducer = (state = defaultState, action) => {
+const weatherReducer = (state:IWeatherState = defaultState, action : PayloadAction<any>) => {
     switch(action.type) {
         case 'weather/chooseCity':
             return {
